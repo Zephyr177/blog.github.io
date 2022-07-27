@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="我的第一篇博客, zh-CN">
+    <meta name="keywords" content="zh-CN">
     <meta name="description" content="不要失去你的崇高，整个世界都将为你敞开">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>我的第一篇博客 | 埃芒的博客</title>
+    <title>埃芒的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">我的第一篇博客</h1>
+                    <h1 class="description center-align post-title"></h1>
                 </div>
             </div>
         </div>
@@ -443,7 +443,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-06-09
+                    2022-07-27
                 </div>
                 
 
@@ -464,7 +464,107 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linux—更换国内镜像源</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1><a id="Linxu_0"></a>Linxu—更换国内镜像源</h1>
+<blockquote>
+<p>在我们安装完linux之后，难免会碰到一些不存在的命令之类的事情，最常见的就是在查看IP的时候系统中不存在ifconfig命令之类的，这就需要去下载，但是下载太慢了呀，系统的镜像默认都是国外的，所以更改镜像源就成了入门必懂的知识</p>
+</blockquote>
+<p>目录<br>
+<a href="#one">1、保存一份镜像源</a><br>
+<a href="#two">2、找到国内镜像源</a><br>
+<a href="#three">3、更改镜像源</a><br>
+<a href="#four">4、查看镜像源更改成功</a><br>
+<a href="#five">5、可能踩到的坑</a></p>
+<hr>
+<h2><a id="a_id__onea_14"></a>一、保存一份镜像源<a id="one"></a></h2>
+<p>虽说国外镜像源非常慢，但是也不是完全用不了，为了保险起见，我们在更换镜像源之前，得先备份一下当前的镜像源。如下：</p>
+<pre><code class="prism language-Linux"> cp /etc/apt/sources.list /etc/apt/sources.list.bak
+</code></pre>
+<p>这样会在指定目录下生成备份文件，至此，我们的的备份工作就完成了。</p>
+<hr>
+<h2><a id="a_idtwoa_23"></a>二、找到国内镜像源<a id="two"></a></h2>
+<p>做完被份工作之后，我们接下来的要找到适合我们版本的镜像源，随后更改。<br>
+<br></p>
+<p><strong>1、查看自己的系统版本</strong><br>
+查看版本的方式有很多种，我这里列举出两种：<br>
+<br></p>
+<ul>
+<li>1.查看version文件。使用以下命令：</li>
+</ul>
+<pre><code class="prism language-Linux">uname -a
+</code></pre>
+<p>会出现以下信息：<br>
+<img src="https://img-blog.csdnimg.cn/1a6d0e9d0dd64880971dc47990905e0c.png#pic_center" alt="版本信息"></p>
+<ul>
+<li>2.使用外置命令（需要下载）：</li>
+</ul>
+<pre><code class="prism language-Linux">linuxlogo
+</code></pre>
+<p>会出现如下信息：<br>
+<img src="https://img-blog.csdnimg.cn/fe1f26e2923c4de481d09dfb338af280.png#pic_center" alt="linuxlogo"><br>
+<br></p>
+<hr>
+<h2><a id="a_idthreea_48"></a>三、更换镜像源<a id="three"></a><a></a></h2>
+<p>获取到国内的Linux镜像源有很多，这里我给出两个镜像源的网站，大家也可以找自己喜欢的镜像源，下面是两个镜像源地址：</p>
+<p>链接1: <a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/AOSP/">清华源</a><br>
+链接2: <a target="_blank" rel="noopener" href="https://developer.aliyun.com/mirror/?spm=a2c6h.13651104.0.d1002.51254763j1usRx">阿里源</a></p>
+<p>找到镜像源之后，找出对应的版本，然后复制镜像源。我这里以Ubuntu18.04版本为例，如下：<br>
+<img src="https://img-blog.csdnimg.cn/8d0e1ac56e2548129d1afa388f6082bd.png#pic_center" alt="清华源"><br>
+复制下来之后，在Linux中使用编辑器打开sources.list文件</p>
+<pre><code class="prism language-Linux">vim /etc/apt/sources.list
+</code></pre>
+<p>删除里面的内容(在vim编辑器的一般模式疯狂按d)，把新内容复制进去<br>
+<img src="https://img-blog.csdnimg.cn/8911af34e4b54193b8578b9ba8ea68a4.png#pic_center" alt="镜像源更换"><br>
+在复制进去之后强制保存且退出（:wq!），这样就更改好了镜像源。<br>
+<br></p>
+<hr>
+<br>
+<h2><a id="_69"></a>四、查看镜像源是否更改成功</h2>
+<p>在更改完之后，我们得测试以下是否更改成功，所以一般会使用以下命令来刷新存储库索引判断镜像源是否更改成功</p>
+<pre><code class="prism language-Linux">apt update
+</code></pre>
+<p>若不出问题，会替换完成。如下：<br>
+<img src="https://img-blog.csdnimg.cn/715cfc1af9904a9f97cbfc854d992249.png#pic_center" alt="镜像源替换成功"><br>
+至此，我们就完成了Linux的镜像源替换。<br>
+<br></p>
+<hr>
+<br>
+<h2><a id="_82"></a>五、可能踩到的坑</h2>
+<blockquote>
+<p>在初次更改镜像源时，踩到坑是难免的，但是踩到的坑千奇百怪，我这里也只能简单列出几个我认为比较常见的坑（一个悲伤的故事）供大家参考。若前四步不存在问题且apt update不出问题的话，可以免去这一步</p>
+</blockquote>
+<h5><a id="1apt__update__86"></a>1、apt  update 测试的时候出了问题</h5>
+<p>在Linux版本比较靠前的同学可能会出现的问题最，主要是14之前的，大致报错应该是不识别这个命令。在14版本之前，包管理一般都被分散在了apt-get、apt-cache、apt-config 等这三个命令中，但是由于apt-get使用的频率很多，其他两个很少，所以在高版本中之间并到apt上了。上面中我们测试的时候不使用apt-get update 是因为在比较高的版本中，各厂商更推荐使用apt而非需要之间的转换，高版本使用apt-get是没问题的，但是低版本没法使用高版本的命令，所以，若在14版本之前的话，那就使用apt-get update。</p>
+<br>
+<h4><a id="2apt_update__91"></a>2、apt update 不可用</h4>
+<p>出现这种问题的同学Linux可能不是Ubuntu，可能是Red Hat、Fedora、CentOS等版本上运行广泛，若你版本是Centos 6、Centos 7则应该是这里出现了这个问题，解决办法是使用以下命令</p>
+<pre><code class="prism language-Linux">yum update
+</code></pre>
+<br>
+<h4><a id="3_99"></a>3、无法连接外网</h4>
+<p>出现这种问题的同学应该是手动配置了IP才照成的，能ping通局域网，但是不能ping外网，导致想更新资源的时候出现问题，这种问题解决也比较容易，使用dhclient命令</p>
+<pre><code class="prism language-Linux">dhclient ens33
+</code></pre>
+<p>这个命令是动态获取IP，使用这个命令后，Linux的IP地址将会自动获取，这就有同学要问了，“我用xshell连接使用这个命令岂不是得重新连接咯？”这也倒不是，我使用这个命令的时候也是在xshell使用的，但是我只敢保证在xshell上没问题，若是使用腾讯云、阿里云等服务器的话我就不敢保证了，若真是服务器上租来的linux的同学还是慎用！！！<br>
+<br><br>
+以上就是我能想到也踩过的坑，若出现问题大家可以参考以下，若能帮助到肯定最好，若帮助不到的话大家就自行百度吧！</p>
+<hr>
+<p><em>结尾：文章中可能还存在着技术上的问题，若某个地方出错还请各位大佬评论区指正。最后感谢大家的阅读。</em></p>
+</div>
+</body>
+
+</html>
+
                 
             </div>
             <hr/>
@@ -490,7 +590,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://aimang2002.github.io/2022/06/09/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">https://aimang2002.github.io/2022/06/09/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</a>
+                    <a href="https://aimang2002.github.io/2022/07/27/Linux%E2%80%94%E6%9B%B4%E6%8D%A2%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90/">https://aimang2002.github.io/2022/07/27/Linux%E2%80%94%E6%9B%B4%E6%8D%A2%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -695,11 +795,12 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/07/27/C++11%E6%96%B0%E7%89%B9%E6%80%A7%E2%80%94%E2%80%94auto%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">
+                <a href="/2022/07/27/Linux%E2%80%94%E6%9B%B4%E6%8D%A2%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90/">
                     <div class="card-image">
                         
                         
@@ -715,9 +816,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-07-27
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-27
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -726,6 +827,7 @@
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -736,13 +838,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/05/27/%E6%96%B0%E7%9A%84%E6%B5%8B%E8%AF%95%E5%8D%9A%E5%AE%A2/">
+                <a href="/2022/07/27/C-11%E6%96%B0%E7%89%B9%E6%80%A7%E2%80%94auto%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="新的测试博客">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="C++11新特性—auto的使用方法">
                         
-                        <span class="card-title">新的测试博客</span>
+                        <span class="card-title">C++11新特性—auto的使用方法</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -753,7 +855,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-05-27
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-27
                             </span>
                         <span class="publish-author">
                             
