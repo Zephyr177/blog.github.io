@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 6.2.0"></head>
+<meta name="generator" content="Hexo 6.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 
@@ -469,25 +469,55 @@
 
 
 <h2 id="1、认识auto"><a href="#1、认识auto" class="headerlink" title=" 1、认识auto"></a><a id="one"></a> 1、认识auto</h2><p>在C++11新特性中，auto是用来修饰局部变量的，所以局部变量也叫auto变量&#x2F;自动变量。auto是个自动推导出数据类型的关键字，应用的场景较为广，举个最简单的“栗子”：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">int a = 10;</span><br><span class="line">auto b = 10;</span><br></pre></td></tr></table></figure>
-
+<pre><code>int a = 10;
+auto b = 10;
+</code></pre>
 <p>这两个本质上是没有区别的，当整数赋值了变量b时，auto就会推导出类型，上面推出来的是int类型。这就是auto类型的作用</p>
 <hr>
 
 
 <h2 id="2、auto的使用场景"><a href="#2、auto的使用场景" class="headerlink" title="2、auto的使用场景"></a><a id="two"></a>2、auto的使用场景</h2><p>auto类型的使用场景还是很多的，例如<strong>普通变量</strong>、<strong>函数的返回值类型</strong>、<strong>自定义数据类型</strong>以及<strong>模板</strong>都能够使用，下列就一一举例：<br><br></p>
 <p> <strong>1.应用在返回值类型上：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//返回真或假的函数</span><br><span class="line">auto function(int num1,int num2)</span><br><span class="line">&#123;</span><br><span class="line">	return num1&gt;num2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code>//返回真或假的函数
+auto function(int num1,int num2)
+&#123;
+    return num1&gt;num2;
+&#125;
+</code></pre>
 <p>上面代码中，返回值是bool类型，两个变量进行比较，返回真或假。<br><br></p>
 <p><strong>2.应用在自定义类型上：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//自定义数据类型</span><br><span class="line">class Person</span><br><span class="line">&#123;</span><br><span class="line">public:</span><br><span class="line">	Person(string name,int age):m_Age(age),m_Name(name) &#123;&#125;</span><br><span class="line">	int m_Age;</span><br><span class="line">	string m_Name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//测试函数</span><br><span class="line">void test01()</span><br><span class="line">&#123;</span><br><span class="line">	auto p = new Person(&quot;张三&quot;, 10);</span><br><span class="line">	cout &lt;&lt;&quot;姓名：&quot; &lt;&lt; p-&gt;m_Name &lt;&lt; &quot;\t年龄：&quot; &lt;&lt; p-&gt;m_Age &lt;&lt; endl;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code>//自定义数据类型
+class Person
+&#123;
+public:
+    Person(string name,int age):m_Age(age),m_Name(name) &#123;&#125;
+    int m_Age;
+    string m_Name;
+&#125;
 
+//测试函数
+void test01()
+&#123;
+    auto p = new Person(&quot;张三&quot;, 10);
+    cout &lt;&lt;&quot;姓名：&quot; &lt;&lt; p-&gt;m_Name &lt;&lt; &quot;\t年龄：&quot; &lt;&lt; p-&gt;m_Age &lt;&lt; endl;
+&#125;
+</code></pre>
 <p>这样也是完全行得通的，并且更加简洁了。也不要进行地址解引用。<br><br></p>
 <p><strong>3.应用在模板上：</strong><br>  <em>注意：这里的auto使用并不是指在模板参数列表上！</em></p>
 <p>我们以STL中的vector容器为例</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">vector&lt;int&gt;v;  </span><br><span class="line">//初始化</span><br><span class="line">for(int i = 0;i&lt;10;i++)</span><br><span class="line">&#123;</span><br><span class="line">	v.push_back(i+10);</span><br><span class="line">&#125;</span><br><span class="line">//遍历</span><br><span class="line">for(auto it = v.begin();it!=v.end();it++)</span><br><span class="line">&#123;</span><br><span class="line">	cout&lt;&lt;*it&lt;&lt;&quot; &quot;;</span><br><span class="line">&#125;</span><br><span class="line">cout&lt;&lt;endl;</span><br></pre></td></tr></table></figure>
-
+<pre><code>vector&lt;int&gt;v;  
+//初始化
+for(int i = 0;i&lt;10;i++)
+&#123;
+    v.push_back(i+10);
+&#125;
+//遍历
+for(auto it = v.begin();it!=v.end();it++)
+&#123;
+    cout&lt;&lt;*it&lt;&lt;&quot; &quot;;
+&#125;
+cout&lt;&lt;endl;
+</code></pre>
 <p>上面是使用迭代器进行遍历，这里的auto推导成了vector&lt; int &gt;的迭代器，和正常使用迭代器遍历没什么区别。</p>
 <p><em>拓展：在推导出类型来的时候，我们想验证auto里面是不是我们想要的类型，在某种情况下会出现二义性，这时候想查看变量的类型时，可以使用typeid()函数，返回值是string类型</em>。<strong>具体用法：cout&lt;&lt;typeid(变量).name()&lt;&lt;endl;</strong> 输出的是变量的类型。</p>
 <hr><br>
@@ -496,33 +526,40 @@
 <h2 id="3、使用auto的注意事项"><a href="#3、使用auto的注意事项" class="headerlink" title="  3、使用auto的注意事项"></a><a id="three"></a>  3、使用auto的注意事项</h2><br/>
 
 <p><strong>1.必须在定义时初始化auto类型的变量</strong><br>下列为反例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">auto a;  //错误</span><br></pre></td></tr></table></figure>
-
+<pre><code>auto a;  //错误
+</code></pre>
 <br/>
 
 <p><strong>2.auto类型不能定义数组</strong><br>下列为反例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">auto array[10]; //错误</span><br></pre></td></tr></table></figure>
-
+<pre><code>auto array[10]; //错误
+</code></pre>
 <br/>
 
 <p><strong>3.auto类型的一旦初始初始化，就不可更改类型</strong><br>下面为反例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">auto a = 10;</span><br><span class="line">a = &quot;ABC&quot;; //错误</span><br></pre></td></tr></table></figure>
-
+<pre><code>auto a = 10;
+a = &quot;ABC&quot;; //错误
+</code></pre>
 <p>当auto的类型一旦确定下来便不可更改。<br><br/></p>
 <p><strong>4.函数参数列表、模板等需要直接确定类型的场景不能使用auto</strong><br>下面为反例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">void function(auto num1)&#123;&#125; //错误！</span><br><span class="line">vector&lt;auto&gt;v;//错误</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
+<pre><code>void function(auto num1)&#123;&#125; //错误！
+vector&lt;auto&gt;v;//错误
+...
+</code></pre>
 <p>但经过测试，在QT中是允许这样操作的，visaul Studio 2022中不行。<br><br/></p>
 <p><strong>5.auto不能作为自定义数据类型的成员的变量类型</strong><br>下列是反例：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Person</span><br><span class="line">&#123;</span><br><span class="line">public:</span><br><span class="line">	auto m_Age; //错误</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code>class Person
+&#123;
+public:
+    auto m_Age; //错误
+&#125;
+</code></pre>
 <hr/>
 *结尾：对于auto的认知我只知道这么多，其实它的功能还有很多，这就让大家去挖掘了。第一次写博客，有很多不足的地方，若某部分出现错误请大佬指正，谢谢！*
 
 
 
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> i = <span class="number">10</span>;</span><br></pre></td></tr></table></figure>
-
+<pre class=" language-C++"><code class="language-C++">int i = 10;
+</code></pre>
 
                 
             </div>

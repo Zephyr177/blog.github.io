@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 6.2.0"></head>
+<meta name="generator" content="Hexo 6.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 
@@ -505,24 +505,24 @@
 <br>
 <h2><a id="a_id__foura_36"></a>四、代码演示<a id="four"></a></h2>
 <p>上面已经把思路给想好了，接下来就是使用代码来实现，代码如下：</p>
-<pre><code class="prism language-C++">void countNumberSort()
+<pre class=" language-prism language-C++"><code class="language-prism language-C++">void countNumberSort()
 &#123;
 	int arr[] = &#123; 5,8,2,4,6,3,8,1,5,4,5,6,7,2 &#125;;
 	int len = sizeof(arr) / sizeof(arr[0]);
-	cout &lt;&lt; len &lt;&lt; endl;
-	map&lt;int, int&gt;m;
+	cout << len << endl;
+	map<int, int>m;
 	
-	for (int i = 0; i &lt; len; i++)
+	for (int i = 0; i < len; i++)
 	&#123;
 
 		m[arr[i]]++;
 	&#125;
 
-	for (map&lt;int, int&gt;::iterator it = m.begin(); it != m.end();)
+	for (map<int, int>::iterator it = m.begin(); it != m.end();)
 	&#123;
-		if (it-&gt;second--)
+		if (it->second--)
 		&#123;
-			cout &lt;&lt; it-&gt;first &lt;&lt; " ";
+			cout << it->first << " ";
 		&#125;
 		else
 		&#123;

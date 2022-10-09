@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 6.2.0"></head>
+<meta name="generator" content="Hexo 6.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 
@@ -489,7 +489,7 @@
 <hr>
 <h2><a id="a_id__onea_14"></a>一、保存一份镜像源<a id="one"></a></h2>
 <p>虽说国外镜像源非常慢，但是也不是完全用不了，为了保险起见，我们在更换镜像源之前，得先备份一下当前的镜像源。如下：</p>
-<pre><code class="prism language-Linux"> cp /etc/apt/sources.list /etc/apt/sources.list.bak
+<pre class=" language-prism language-Linux"><code class="language-prism language-Linux"> cp /etc/apt/sources.list /etc/apt/sources.list.bak
 </code></pre>
 <p>这样会在指定目录下生成备份文件，至此，我们的的备份工作就完成了。</p>
 <hr>
@@ -502,14 +502,14 @@
 <ul>
 <li>1.查看version文件。使用以下命令：</li>
 </ul>
-<pre><code class="prism language-Linux">uname -a
+<pre class=" language-prism language-Linux"><code class="language-prism language-Linux">uname -a
 </code></pre>
 <p>会出现以下信息：<br>
 <img src="https://img-blog.csdnimg.cn/1a6d0e9d0dd64880971dc47990905e0c.png#pic_center" alt="版本信息"></p>
 <ul>
 <li>2.使用外置命令（需要下载）：</li>
 </ul>
-<pre><code class="prism language-Linux">linuxlogo
+<pre class=" language-prism language-Linux"><code class="language-prism language-Linux">linuxlogo
 </code></pre>
 <p>会出现如下信息：<br>
 <img src="https://img-blog.csdnimg.cn/fe1f26e2923c4de481d09dfb338af280.png#pic_center" alt="linuxlogo"><br>
@@ -522,7 +522,7 @@
 <p>找到镜像源之后，找出对应的版本，然后复制镜像源。我这里以Ubuntu18.04版本为例，如下：<br>
 <img src="https://img-blog.csdnimg.cn/8d0e1ac56e2548129d1afa388f6082bd.png#pic_center" alt="清华源"><br>
 复制下来之后，在Linux中使用编辑器打开sources.list文件</p>
-<pre><code class="prism language-Linux">vim /etc/apt/sources.list
+<pre class=" language-prism language-Linux"><code class="language-prism language-Linux">vim /etc/apt/sources.list
 </code></pre>
 <p>删除里面的内容(在vim编辑器的一般模式疯狂按d)，把新内容复制进去<br>
 <img src="https://img-blog.csdnimg.cn/8911af34e4b54193b8578b9ba8ea68a4.png#pic_center" alt="镜像源更换"><br>
@@ -532,7 +532,7 @@
 <br>
 <h2><a id="_a_idfoura_69"></a>四、查看镜像源是否更改成功 <a id="four"></a></h2>
 <p>在更改完之后，我们得测试以下是否更改成功，所以一般会使用以下命令来刷新存储库索引判断镜像源是否更改成功</p>
-<pre><code class="prism language-Linux">apt update
+<pre class=" language-prism language-Linux"><code class="language-prism language-Linux">apt update
 </code></pre>
 <p>若不出问题，会替换完成。如下：<br>
 <img src="https://img-blog.csdnimg.cn/715cfc1af9904a9f97cbfc854d992249.png#pic_center" alt="镜像源替换成功"><br>
@@ -549,12 +549,12 @@
 <br>
 <h4><a id="2apt_update__91"></a>2、apt update 不可用</h4>
 <p>出现这种问题的同学Linux可能不是Ubuntu，可能是Red Hat、Fedora、CentOS等版本上运行广泛，若你版本是Centos 6、Centos 7则应该是这里出现了这个问题，解决办法是使用以下命令</p>
-<pre><code class="prism language-Linux">yum update
+<pre class=" language-prism language-Linux"><code class="language-prism language-Linux">yum update
 </code></pre>
 <br>
 <h4><a id="3_99"></a>3、无法连接外网</h4>
 <p>出现这种问题的同学应该是手动配置了IP才照成的，能ping通局域网，但是不能ping外网，导致想更新资源的时候出现问题，这种问题解决也比较容易，使用dhclient命令</p>
-<pre><code class="prism language-Linux">dhclient ens33
+<pre class=" language-prism language-Linux"><code class="language-prism language-Linux">dhclient ens33
 </code></pre>
 <p>这个命令是动态获取IP，使用这个命令后，Linux的IP地址将会自动获取，这就有同学要问了，“我用xshell连接使用这个命令岂不是得重新连接咯？”这也倒不是，我使用这个命令的时候也是在xshell使用的，但是我只敢保证在xshell上没问题，若是使用腾讯云、阿里云等服务器的话我就不敢保证了，若真是服务器上租来的linux的同学还是慎用！！！<br>
 <br><br>

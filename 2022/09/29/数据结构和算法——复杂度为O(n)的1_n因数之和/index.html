@@ -29,7 +29,7 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 6.2.0"></head>
+<meta name="generator" content="Hexo 6.2.0"><link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
 
 
 
@@ -494,12 +494,12 @@
 <hr>
 <h2><a id="a_idtocheading2a_25"></a>二、传统写法<a id="toc-heading-2"></a></h2>
 <p>所谓传统写法就暴力枚举，将每一个数字都提出所有的因子，然后进行相加统计，获得最终结果，方式如下：</p>
-<pre><code class="prism language-C++">int function(const int n)
+<pre class=" language-prism language-C++"><code class="language-prism language-C++">int function(const int n)
 &#123;
 	long long sum = 0;
-	for (int i = 1; i &lt;= n; i++)
+	for (int i = 1; i <= n; i++)
 	&#123;
-		for (int j = 1; j &lt;= i; j++)
+		for (int j = 1; j <= i; j++)
 		&#123;
 			if (i%j == 0)sum += j;
 		&#125;
@@ -508,12 +508,12 @@
 &#125;
 </code></pre>
 <p>这种算法的复杂度是很高的，所用的时间复杂度为O(n<sup>2</sup>)。所以就出现了下面这种优化的方案：</p>
-<pre><code class="prism language-C++">int function(const int n)
+<pre class=" language-prism language-C++"><code class="language-prism language-C++">int function(const int n)
 &#123;
 	long long sum = 0;
-	for (int i = 1; i &lt;= n; i++)  // 时间复杂度为：O(n)
+	for (int i = 1; i <= n; i++)  // 时间复杂度为：O(n)
 	&#123;
-		for (int j = 1; j * j &lt;= i; j++) // 时间复杂度为：O(根号n)
+		for (int j = 1; j * j <= i; j++) // 时间复杂度为：O(根号n)
 		&#123;
 			if (i % j == 0)
 			&#123;
@@ -539,10 +539,10 @@
 <hr>
 <h2><a id="a_idtocheading4a_79"></a>二、代码演示<a id="toc-heading-4"></a></h2>
 <p>下面是优化后的解法:</p>
-<pre><code class="prism language-C++">int function(const int n)
+<pre class=" language-prism language-C++"><code class="language-prism language-C++">int function(const int n)
 &#123;
 	long long sum = 0;
-	for (int i = 1; i &lt;= n; i++)
+	for (int i = 1; i <= n; i++)
 	&#123;
 		sum += i * (n / i);
 	&#125; 
