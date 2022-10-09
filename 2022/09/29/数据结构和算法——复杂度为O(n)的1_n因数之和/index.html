@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="数据结构和算法————计数排序, zh-CN">
+    <meta name="keywords" content="数据结构和算法————复杂度为O(n)的1~n因数之和, zh-CN">
     <meta name="description" content="测试文档，可删除">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>数据结构和算法————计数排序 | 埃芒的博客</title>
+    <title>数据结构和算法————复杂度为O(n)的1~n因数之和 | 埃芒的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">数据结构和算法————计数排序</h1>
+                    <h1 class="description center-align post-title">数据结构和算法————复杂度为O(n)的1~n因数之和</h1>
                 </div>
             </div>
         </div>
@@ -443,7 +443,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-09-08
+                    2022-09-29
                 </div>
                 
 
@@ -470,72 +470,89 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>数据结构和算法 ——计数排序</title>
+  <title>数据结构和算法——复杂度为O(n)的1~n因数之和</title>
   <link rel="stylesheet" href="https://stackedit.io/style.css" />
-  	<style type="text/css" >a{text-decoration: none}</style>
+  <style type="text/css" >a{text-decoration: none}</style>
 </head>
 
 <body class="stackedit">
-  <div class="stackedit__html"><h1><a id="_0"></a>计数排序</h1>
-<blockquote>
-<p>根据我自己所学到的以及所认识的，对计数排序做一个总结化的讲解。</p>
-</blockquote>
+  <div class="stackedit__html"><h1><a id="On1n_0"></a>复杂度为O(n)的1~n因数之和</h1>
 <p><b>目录<b><br>
-<a href="#one " style="text-decoration: none">一、了解计数排序</a><br>
-<a href="#two" style="text-decoration: none">二、计数排序的工作原理</a><br>
-<a href="#three" style="text-decoration: none">三、计数排序的弊端以及优化</a><br>
-<a href="#four" style="text-decoration: none">四、代码演示</a></b></b></p><b>
+<a href="#toc-heading-1" style="text-decoration: none">一、题目描述</a><br>
+<a href="#toc-heading-2" style="text-decoration: none">二、传统写法</a><br>
+<a href="#toc-heading-3" style="text-decoration: none">三、优化分析</a><br>
+<a href="#toc-heading-4" style="text-decoration: none">四、代码演示</a></b></b></p><b>
 <hr>
-<h2><a id="a_id__onea_12"></a>一、了解计数排序<a id="one"></a></h2>
-<p>计数排序是一个非基于比较的排序算法，该算法于1954年由 Harold H. Seward 提出。这一排序算法是利用一个额外的数组来对当前一组数据进行排序的算法，它和其他排序算法不同，不需要重复遍历，只需对数据遍历一遍，将一组数据中相同的元素记录在一块，然后再对其进行特殊的输出即可。</p>
-<p><br><br><br></p>
-<hr>
-<br>
-<h2><a id="a_id__twoa_20"></a>二、计数排序的工作原理<a id="two"></a></h2>
-<p><strong>下面我们准备一组无序的整型数据做讲解：</strong><br>
-<img src="https://img-blog.csdnimg.cn/0606ca6ae03e4b93bc8c070c484161d6.png" alt="原理图"><br>
-<strong>解析：</strong> 准备一个大于无序数组(arr)中所存储的最大值的临时数组(tempArr)，然后遍历arr，将当前数组元素作为tempArr下标，让临时数组中相对应的下标所对应的值递增，核心代码为<code>tempArr[arr[i]]++</code>（本质上是用下标做一系列操作）,直到遍历完成，tempArr中的下标就是arr的元素，tempArr中的元素就是当前下标所存在的个数。其实我们后面输出的主要是index，相对应得元素值只是作为记录index所要出现的次数。</p>
-<p><br><br><br></p>
-<hr>
-<br>
-<h2><a id="a_id__threea_29"></a>三、计数排序的弊端以及优化<a id="three"></a></h2>
-<p>对于弊端，显而易见，是一种牺牲空间换取时间的一种算法，那么现在就出现了一个问题，如果现在arr中的值最大值为10<sup>8</sup>甚至更多，那么tempArr所需要开辟的空间所换取的时间显然是亏到姥姥家了，我还不如用冒泡排序呢。但是我们也能用其他的方式来代替数组，这里使用C++中STL的map来代替数组，<u>使用key值保存arr中的元素，value值保存key值出现的次数</u>，完美模仿了上面的功能且优化了开辟无用空间过多的情况。当然，若你的key值是自定义数据类型，那么只需要在原有的思想上稍加改进即可。</p>
-<p><br><br><br></p>
-<hr>
-<br>
-<h2><a id="a_id__foura_36"></a>四、代码演示<a id="four"></a></h2>
-<p>上面已经把思路给想好了，接下来就是使用代码来实现，代码如下：</p>
-<pre><code class="prism language-C++">void countNumberSort()
-&#123;
-	int arr[] = &#123; 5,8,2,4,6,3,8,1,5,4,5,6,7,2 &#125;;
-	int len = sizeof(arr) / sizeof(arr[0]);
-	cout &lt;&lt; len &lt;&lt; endl;
-	map&lt;int, int&gt;m;
-	
-	for (int i = 0; i &lt; len; i++)
-	&#123;
-
-		m[arr[i]]++;
-	&#125;
-
-	for (map&lt;int, int&gt;::iterator it = m.begin(); it != m.end();)
-	&#123;
-		if (it-&gt;second--)
-		&#123;
-			cout &lt;&lt; it-&gt;first &lt;&lt; " ";
-		&#125;
-		else
-		&#123;
-			it++;
-		&#125;
-	&#125;
-&#125;
+<h2><a id="a_idtocheading1a_12"></a>一、题目描述<a id="toc-heading-1"></a></h2>
+<p><strong>题目：</strong> 输入一个数字n，求出这个数从1~n的所有因数之和</p>
+<pre><code>输入样例：
+		12
+输出样例：
+		87
 </code></pre>
 <p><br><br><br></p>
+<hr>
+<h2><a id="a_idtocheading2a_25"></a>二、传统写法<a id="toc-heading-2"></a></h2>
+<p>所谓传统写法就暴力枚举，将每一个数字都提出所有的因子，然后进行相加统计，获得最终结果，方式如下：</p>
+<pre><code class="prism language-C++">int function(const int n)
+&#123;
+	long long sum = 0;
+	for (int i = 1; i &lt;= n; i++)
+	&#123;
+		for (int j = 1; j &lt;= i; j++)
+		&#123;
+			if (i%j == 0)sum += j;
+		&#125;
+	&#125;
+	return sum;
+&#125;
+</code></pre>
+<p>这种算法的复杂度是很高的，所用的时间复杂度为O(n<sup>2</sup>)。所以就出现了下面这种优化的方案：</p>
+<pre><code class="prism language-C++">int function(const int n)
+&#123;
+	long long sum = 0;
+	for (int i = 1; i &lt;= n; i++)  // 时间复杂度为：O(n)
+	&#123;
+		for (int j = 1; j * j &lt;= i; j++) // 时间复杂度为：O(根号n)
+		&#123;
+			if (i % j == 0)
+			&#123;
+				sum += j;
+				if (j * j == i)continue; //break和continue都一样
+				sum += i / j;
+			&#125;
+		&#125;
+	&#125;
+	return sum;
+&#125;
+</code></pre>
+<p>这种优化的灵感是来自当 <code>i*j==n</code>时，相当于找到了两个因子，所以这里选择开方的方式判断，时间复杂度为<mark>0(n根号n)</mark>，对比前一个算法来说节省了不少时间。不过复杂度还是很大，当n&lt;=10<sup>7</sup>时，计算时间将会超过1秒。</p>
+<p><br><br><br></p>
+<hr>
+<h2><a id="a_idtocheading3a_67"></a>二、优化分析<a id="toc-heading-3"></a></h2>
+<p>比起暴力的枚举不同，这个算法使用的是1~n中每个因子提供的次数所算出来的，我们假设n=6，如下图：</p>
+<p><img src="https://img-blog.csdnimg.cn/c3c52b035c614b77b2fb92a142e74f5a.png" alt="图1"><br>
+上面表格中，因子1在1~n中存在的数量是6，具体存在的数字是1 2 3 4 5 6；同样理解，因子2在1~n中存在的数量是3，具体存在的数字是2 4 6。我们知道各个因子出现的次数之后，将每因子次数加起来再统计，最终结果就是我们所需要的因数之和，公式为i*(n/i)。<br>
+<br><br>
+<strong>公式<code>i×(n/i)</code>的由来：</strong> i即时因子从1~n的每个因子；(n/i)即是计算因子数量，需要注意这里若i=4时，为什么结果为1而不是浮点数，第一是两个整数计算后还是整数，第二是若是两个，则这里存在它的数字就是4 8，这超出了n的最大值。</p>
+<p><br><br><br></p>
+<hr>
+<h2><a id="a_idtocheading4a_79"></a>二、代码演示<a id="toc-heading-4"></a></h2>
+<p>下面是优化后的解法:</p>
+<pre><code class="prism language-C++">int function(const int n)
+&#123;
+	long long sum = 0;
+	for (int i = 1; i &lt;= n; i++)
+	&#123;
+		sum += i * (n / i);
+	&#125; 
+	return sum;
+&#125;
+</code></pre>
+<p>这种算法的时间复杂度是O(n)，优化成了线性阶，当n&lt;=10<sup>9</sup>时，计算的时间也是很理想的。</p>
 <blockquote>
-<p>注意：当出现其他题目，例如要你统计字符数量且对其排序，这类题目也可以使用计数排序进行解答，需要灵活的使用下标，甚至是自定义数据类型，我们只需要重载相对应的运算符，即可在map上运行且排序方式更加灵活。</p>
+<p>初学小白，若有不足的地方还请大佬指正，谢谢！</p>
 </blockquote>
-<p><em>最后：学习编程两年不到半的小菜鸡对计数排序的学习总结，若有不足请指正，感谢大佬们的阅读！</em></p>
 </b></div>
 </body>
 
@@ -566,7 +583,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://aimang2002.github.io/2022/09/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95%20%E2%80%94%E2%80%94%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F/">https://aimang2002.github.io/2022/09/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95%20%E2%80%94%E2%80%94%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F/</a>
+                    <a href="https://aimang2002.github.io/2022/09/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%BAO(n)%E7%9A%841_n%E5%9B%A0%E6%95%B0%E4%B9%8B%E5%92%8C/">https://aimang2002.github.io/2022/09/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%BAO(n)%E7%9A%841_n%E5%9B%A0%E6%95%B0%E4%B9%8B%E5%92%8C/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -771,9 +788,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/09/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%BAO(n)%E7%9A%841_n%E5%9B%A0%E6%95%B0%E4%B9%8B%E5%92%8C/">
                     <div class="card-image">
@@ -791,9 +809,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-09-29
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-29
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -802,6 +820,7 @@
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -812,13 +831,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/07/28/Linux%E2%80%94%E6%9B%B4%E6%8D%A2%E5%9B%BD%E5%86%85%E9%95%9C%E5%83%8F%E6%BA%90/">
+                <a href="/2022/09/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95%20%E2%80%94%E2%80%94%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="Linux_更改国内镜像源">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="数据结构和算法————计数排序">
                         
-                        <span class="card-title">Linux_更改国内镜像源</span>
+                        <span class="card-title">数据结构和算法————计数排序</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -829,7 +848,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-07-28
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-08
                             </span>
                         <span class="publish-author">
                             
