@@ -453,28 +453,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-09-29
+                    2022-11-23
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-10-09
+                    2022-11-23
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    161
+                    633
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -500,89 +500,74 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>数据结构和算法——复杂度为O(n)的1~n因数之和</title>
+  <title>C/C++ malloc和new</title>
   <link rel="stylesheet" href="https://stackedit.io/style.css" />
   <style type="text/css" >a{text-decoration: none}</style>
 </head>
 
 <body class="stackedit">
-  <div class="stackedit__html"><h1><a id="On1n_0"></a>复杂度为O(n)的1~n因数之和</h1>
-<p><b>目录<b><br>
-<a href="#toc-heading-1" style="text-decoration: none">一、题目描述</a><br>
-<a href="#toc-heading-2" style="text-decoration: none">二、传统写法</a><br>
-<a href="#toc-heading-3" style="text-decoration: none">三、优化分析</a><br>
-<a href="#toc-heading-4" style="text-decoration: none">四、代码演示</a></b></b></p><b>
-<hr>
-<h2><a id="a_idtocheading1a_12"></a>一、题目描述<a id="toc-heading-1"></a></h2>
-<p><strong>题目：</strong> 输入一个数字n，求出这个数从1~n的所有因数之和</p>
-<pre><code>输入样例：
-		12
-输出样例：
-		87
-</code></pre>
-<p><br><br><br></p>
-<hr>
-<h2><a id="a_idtocheading2a_25"></a>二、传统写法<a id="toc-heading-2"></a></h2>
-<p>所谓传统写法就暴力枚举，将每一个数字都提出所有的因子，然后进行相加统计，获得最终结果，方式如下：</p>
-<pre class=" language-prism language-C++"><code class="language-prism language-C++">int function(const int n)
-&#123;
-	long long sum = 0;
-	for (int i = 1; i <= n; i++)
-	&#123;
-		for (int j = 1; j <= i; j++)
-		&#123;
-			if (i%j == 0)sum += j;
-		&#125;
-	&#125;
-	return sum;
-&#125;
-</code></pre>
-<p>这种算法的复杂度是很高的，所用的时间复杂度为O(n<sup>2</sup>)。所以就出现了下面这种优化的方案：</p>
-<pre class=" language-prism language-C++"><code class="language-prism language-C++">int function(const int n)
-&#123;
-	long long sum = 0;
-	for (int i = 1; i <= n; i++)  // 时间复杂度为：O(n)
-	&#123;
-		for (int j = 1; j * j <= i; j++) // 时间复杂度为：O(根号n)
-		&#123;
-			if (i % j == 0)
-			&#123;
-				sum += j;
-				if (j * j == i)continue; //break和continue都一样
-				sum += i / j;
-			&#125;
-		&#125;
-	&#125;
-	return sum;
-&#125;
-</code></pre>
-<p>这种优化的灵感是来自当 <code>i*j==n</code>时，相当于找到了两个因子，所以这里选择开方的方式判断，时间复杂度为<mark>0(n根号n)</mark>，对比前一个算法来说节省了不少时间。不过复杂度还是很大，当n&lt;=10<sup>7</sup>时，计算时间将会超过1秒。</p>
-<p><br><br><br></p>
-<hr>
-<h2><a id="a_idtocheading3a_67"></a>二、优化分析<a id="toc-heading-3"></a></h2>
-<p>比起暴力的枚举不同，这个算法使用的是1~n中每个因子提供的次数所算出来的，我们假设n=6，如下图：</p>
-<p><img src="https://img-blog.csdnimg.cn/c3c52b035c614b77b2fb92a142e74f5a.png" alt="图1"><br>
-上面表格中，因子1在1~n中存在的数量是6，具体存在的数字是1 2 3 4 5 6；同样理解，因子2在1~n中存在的数量是3，具体存在的数字是2 4 6。我们知道各个因子出现的次数之后，将每因子次数加起来再统计，最终结果就是我们所需要的因数之和，公式为i*(n/i)。<br>
-<br><br>
-<strong>公式<code>i×(n/i)</code>的由来：</strong> i即时因子从1~n的每个因子；(n/i)即是计算因子数量，需要注意这里若i=4时，为什么结果为1而不是浮点数，第一是两个整数计算后还是整数，第二是若是两个，则这里存在它的数字就是4 8，这超出了n的最大值。</p>
-<p><br><br><br></p>
-<hr>
-<h2><a id="a_idtocheading4a_79"></a>二、代码演示<a id="toc-heading-4"></a></h2>
-<p>下面是优化后的解法:</p>
-<pre class=" language-prism language-C++"><code class="language-prism language-C++">int function(const int n)
-&#123;
-	long long sum = 0;
-	for (int i = 1; i <= n; i++)
-	&#123;
-		sum += i * (n / i);
-	&#125; 
-	return sum;
-&#125;
-</code></pre>
-<p>这种算法的时间复杂度是O(n)，优化成了线性阶，当n&lt;=10<sup>9</sup>时，计算的时间也是很理想的。</p>
+  <div class="stackedit__html"><h1><a id="mallocnew_0"></a>malloc和new</h1>
 <blockquote>
-<p>初学小白，若有不足的地方还请大佬指正，谢谢！</p>
+<p>若想在堆区开辟空间时，C是使用malloc函数，而在C++则是使用new关键字。那么，C中的malloc和new有什么区别呢？这也是在面试时常见的问题。</p>
 </blockquote>
+<p><b>目录<b><br>
+<a href="#toc-heading-1" style="text-decoration: none">一、malloc和new的基本用法</a><br>
+<a href="#toc-heading-2" style="text-decoration: none">二、自由存储区&amp;堆的概念</a><br>
+<a href="#toc-heading-3" style="text-decoration: none">三、malloc的实现方式</a><br>
+<a href="#toc-heading-4" style="text-decoration: none">四、new的实现方式</a></b></b></p><b>
+<hr>
+<h2><a id="mallocnewa_idtocheading1a_15"></a>一、malloc和new的基本用法<a id="toc-heading-1"></a></h2>
+<p><strong>malloc：</strong> 它是C语言的一个函数，主要是在<u>堆区</u>申堆区请一块指定大小(由开发者指定)的内存空间，由开发者自己管理那一块内存空间。如下：</p>
+<pre class=" language-prism language-C"><code class="language-prism language-C">int *p = (int*)malloc(sizeof(int));
+</code></pre>
+<p>这里的意思是：在堆区申请一块长度为int字节的内存空间，这里可以使用字面变量，但是不建议，因为很危险，然后malloc返回出开辟后的空间，它返回的是void*类型，所以这里我们强转为自己想要的类型。<br>
+<br><br></p>
+<p><strong>new：</strong> C++中开辟空间的关键字，主要作用是在<u>自由存储区</u>申请一块内存空间，申请一块内存空间。如下：</p>
+<pre class=" language-prism language-C++"><code class="language-prism language-C++">int *p = new int(20);
+</code></pre>
+<p>上面的意思是：在自由存储区申请一块长度为int的内存空间，里面存放着值为20。</p>
+<p>从宏观上看，这就相当于C++中的bool类型和Java中的boolean类型一样，都是实现同样的功能，这是它们本质的作用，但是往跟深的看那还有有很多不一样的。malloc和new都是自己开辟内存空间，自己管理释放，相对的配套使用则是free()函数和delete关键字。其中free函数是用来释放malloc申请的空间，而delete是释放new开辟的空间。</p>
+<hr>
+<br>
+<h2><a id="a_idtocheading2a_35"></a>二、自由存储区&amp;堆的概念<a id="toc-heading-2"></a></h2>
+<p>在某些教材中，C++的分区模块是四大部分：代码区、全局区、栈区、堆区。这样说也没错，但实际上还有一个分区：<mark>自由存储区(free store)</mark>。关于对自由存储区的解释：自由存储是C++中通过new和delete动态分配和释放对象的抽象概念，通过new来申请的内存区域可称为自由存储区。而<mark>堆(heap)</mark> 是C语言和操作系统的一个术语，堆是操作系统所维护的一块特殊内存，它提供了动态分配的功能。我们可以用土办法来下面代码输出的结果：</p>
+<pre class=" language-prism language-C++"><code class="language-prism language-C++">int* p = (int*)malloc(4);
+cout << "malloc = " << p << endl;
+p = (int*)malloc(4);
+cout <<"malloc = " << p << endl;
+
+int* p2 = new int(50);
+cout << "new = " << p2 << endl;
+int *p3 = new int(100);
+cout << "new = " << p3 << endl;
+</code></pre>
+<p>运行结果为：<br>
+<img src="https://img-blog.csdnimg.cn/b33f8ecd8c614c14acd56c256203c7e0.png" alt="运行结果"><br>
+可以发现两个malloc出来的地址和new出来的不太一样，这是因为C++使用的区域是自由存储区。关于自由存储区的来历，它是C++在堆上建立的一块区域，其中就是供new来使用。但是需要注意：自由存储区并不等价于堆区，这一点是不能弄混的，不能说自由存储区建立在堆区上那就是堆了。</p>
+<hr>
+<br>
+<h2><a id="malloca_idtocheading3a_55"></a>三、malloc的实现方式<a id="toc-heading-3"></a></h2>
+<p>malloc的实现方式是将堆的特定段空间申请出来，然后供开发者使用，我们以下面这个为示例：</p>
+<pre class=" language-prism language-C"><code class="language-prism language-C">int* p = (int*)malloc(sizeof(int));
+</code></pre>
+<p>上面说过。malloc是个函数，sizeof(int)表示申请的空间大小，之后返回void*类型的地址，这里转为int类型的地址，这一步一定要转类型，否则有可能出现乱码，例如下面这种情况：</p>
+<pre class=" language-prism language-C"><code class="language-prism language-C">void* p = malloc(sizeof(char));
+char* ch = (char*)p;
+*ch = 'a';
+cout << ch << endl;
+</code></pre>
+<p>输出结果：a葺葺葺葺葺輯竱1，反正就是乱码。</p>
+<br>
+<hr>
+<br>
+<h2><a id="newa_idtocheading4a_73"></a>四、new的实现方式<a id="toc-heading-4"></a></h2>
+<p>new关键字的实现方式是申请一块特定的区域给某个类型，而且更智能，而非malloc那么繁琐，语法上也更加简单也更智能，并且支持重载。C++底层源码中它是这么写的：<br>
+<img src="https://img-blog.csdnimg.cn/e4b989d34eeb4cfc9da4776b70156450.png" alt="new关键字底层代码"><br>
+这是编译器提供的底层和重载，可以看见它还重载了[]，保证在创建数组的时候能使用，我们也可以<mark>自己重载</mark>。它在申请内存时分为三部分：<br>
+1、调用operator new<br>
+2、编译器运行相应的构造函数以构造数据类型，并为其传入初值。<br>
+3、对象构造完成后，返回一个指向该数据类型的指针。</p>
+<p>注意：当我们重载new的时候，它存放的地方是由我们指定的。在众多C++编译器中，有部分编译器new关键字在底层的写法就是采用malloc来实现，这就是上面所说的有些教材说new是建立在堆区的。</p>
 </b></div>
 </body>
 
@@ -613,7 +598,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://aimang2002.github.io/2022/09/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%BAO(n)%E7%9A%841_n%E5%9B%A0%E6%95%B0%E4%B9%8B%E5%92%8C/">https://aimang2002.github.io/2022/09/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%BAO(n)%E7%9A%841_n%E5%9B%A0%E6%95%B0%E4%B9%8B%E5%92%8C/</a>
+                    <a href="https://aimang2002.github.io/2022/11/23/C_C++%20malloc%E5%92%8Cnew/">https://aimang2002.github.io/2022/11/23/C_C++%20malloc%E5%92%8Cnew/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -818,9 +803,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2022/11/23/C_C++%20malloc%E5%92%8Cnew/">
                     <div class="card-image">
@@ -838,9 +824,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-11-23
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-23
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -849,6 +835,7 @@
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -859,13 +846,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/09/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95%20%E2%80%94%E2%80%94%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F/">
+                <a href="/2022/09/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%BAO(n)%E7%9A%841_n%E5%9B%A0%E6%95%B0%E4%B9%8B%E5%92%8C/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="数据结构和算法————计数排序">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="数据结构和算法————复杂度为O(n)的1~n因数之和">
                         
-                        <span class="card-title">数据结构和算法————计数排序</span>
+                        <span class="card-title">数据结构和算法————复杂度为O(n)的1~n因数之和</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -876,7 +863,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-08
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-29
                             </span>
                         <span class="publish-author">
                             
