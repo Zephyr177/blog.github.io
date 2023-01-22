@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="数据结构和算法————复杂度为O(n)的1~n因数之和, zh-CN">
+    <meta name="keywords" content="Windows 10 系统安装, zh-CN">
     <meta name="description" content="心有所向，日复一日，必有精进!">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>数据结构和算法————复杂度为O(n)的1~n因数之和 | 埃芒的博客</title>
+    <title>Windows 10 系统安装 | 埃芒的博客</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -298,12 +298,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/18.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">数据结构和算法————复杂度为O(n)的1~n因数之和</h1>
+                    <h1 class="description center-align post-title">Windows 10 系统安装</h1>
                 </div>
             </div>
         </div>
@@ -417,25 +417,12 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                    <div class="article-tag">
-                        
-                            <a href="/tags/%E5%9B%A0%E6%95%B0%E4%B9%8B%E5%92%8C/">
-                                <span class="chip bg-color">因数之和</span>
-                            </a>
-                        
-                    </div>
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
                     
                 </div>
                 <div class="col s5 right-align">
-                    
-                    <div class="post-cate">
-                        <i class="fas fa-bookmark fa-fw icon-category"></i>
-                        
-                            <a href="/categories/algorithm/" class="post-category">
-                                algorithm
-                            </a>
-                        
-                    </div>
                     
                 </div>
             </div>
@@ -444,28 +431,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-09-29
+                    2023-01-23
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-11-27
+                    2023-01-23
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    161
+                    1.1k
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    3 分
                 </div>
                 
 
@@ -491,88 +478,97 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>数据结构和算法——复杂度为O(n)的1~n因数之和</title>
+  <title>Windows10系统安装</title>
   <link rel="stylesheet" href="https://stackedit.io/style.css" />
-  <style type="text/css" >a{text-decoration: none}</style>
 </head>
 
 <body class="stackedit">
-  <div class="stackedit__html"><h1><a id="On1n_0"></a>复杂度为O(n)的1~n因数之和</h1>
-<p><b>目录<b><br>
-<a href="#toc-heading-1" style="text-decoration: none">一、题目描述</a><br>
-<a href="#toc-heading-2" style="text-decoration: none">二、传统写法</a><br>
-<a href="#toc-heading-3" style="text-decoration: none">三、优化分析</a><br>
-<a href="#toc-heading-4" style="text-decoration: none">四、代码演示</a></b></b></p><b>
-<hr>
-<h2><a id="a_idtocheading1a_12"></a>一、题目描述<a id="toc-heading-1"></a></h2>
-<p><strong>题目：</strong> 输入一个数字n，求出这个数从1~n的所有因数之和</p>
-<pre><code>输入样例：
-		12
-输出样例：
-		87
-</code></pre>
-<p><br><br><br></p>
-<hr>
-<h2><a id="a_idtocheading2a_25"></a>二、传统写法<a id="toc-heading-2"></a></h2>
-<p>所谓传统写法就暴力枚举，将每一个数字都提出所有的因子，然后进行相加统计，获得最终结果，方式如下：</p>
-<pre class=" language-prism language-C++"><code class="language-prism language-C++">int function(const int n)
-&#123;
-	long long sum = 0;
-	for (int i = 1; i <= n; i++)
-	&#123;
-		for (int j = 1; j <= i; j++)
-		&#123;
-			if (i%j == 0)sum += j;
-		&#125;
-	&#125;
-	return sum;
-&#125;
-</code></pre>
-<p>这种算法的复杂度是很高的，所用的时间复杂度为O(n<sup>2</sup>)。所以就出现了下面这种优化的方案：</p>
-<pre class=" language-prism language-C++"><code class="language-prism language-C++">int function(const int n)
-&#123;
-	long long sum = 0;
-	for (int i = 1; i <= n; i++)  // 时间复杂度为：O(n)
-	&#123;
-		for (int j = 1; j * j <= i; j++) // 时间复杂度为：O(根号n)
-		&#123;
-			if (i % j == 0)
-			&#123;
-				sum += j;
-				if (j * j == i)continue; //break和continue都一样
-				sum += i / j;
-			&#125;
-		&#125;
-	&#125;
-	return sum;
-&#125;
-</code></pre>
-<p>这种优化的灵感是来自当 <code>i*j==n</code>时，相当于找到了两个因子，所以这里选择开方的方式判断，时间复杂度为<mark>0(n根号n)</mark>，对比前一个算法来说节省了不少时间。不过复杂度还是很大，当n&lt;=10<sup>7</sup>时，计算时间将会超过1秒。</p>
-<p><br><br><br></p>
-<hr>
-<h2><a id="a_idtocheading3a_67"></a>二、优化分析<a id="toc-heading-3"></a></h2>
-<p>比起暴力的枚举不同，这个算法使用的是1~n中每个因子提供的次数所算出来的，我们假设n=6，如下图：</p>
-<p><img src="https://img-blog.csdnimg.cn/c3c52b035c614b77b2fb92a142e74f5a.png" alt="图1"><br>
-上面表格中，因子1在1~n中存在的数量是6，具体存在的数字是1 2 3 4 5 6；同样理解，因子2在1~n中存在的数量是3，具体存在的数字是2 4 6。我们知道各个因子出现的次数之后，将每因子次数加起来再统计，最终结果就是我们所需要的因数之和，公式为i*(n/i)。<br>
-<br><br>
-<strong>公式<code>i×(n/i)</code>的由来：</strong> i即时因子从1~n的每个因子；(n/i)即是计算因子数量，需要注意这里若i=4时，为什么结果为1而不是浮点数，第一是两个整数计算后还是整数，第二是若是两个，则这里存在它的数字就是4 8，这超出了n的最大值。</p>
-<p><br><br><br></p>
-<hr>
-<h2><a id="a_idtocheading4a_79"></a>二、代码演示<a id="toc-heading-4"></a></h2>
-<p>下面是优化后的解法:</p>
-<pre class=" language-prism language-C++"><code class="language-prism language-C++">int function(const int n)
-&#123;
-	long long sum = 0;
-	for (int i = 1; i <= n; i++)
-	&#123;
-		sum += i * (n / i);
-	&#125; 
-	return sum;
-&#125;
-</code></pre>
-<p>这种算法的时间复杂度是O(n)，优化成了线性阶，当n&lt;=10<sup>9</sup>时，计算的时间也是很理想的。</p>
+  <div class="stackedit__html"><h1><a id="Windows10_0"></a>Windows10系统安装</h1>
 <blockquote>
-<p>初学小白，若有不足的地方还请大佬指正，谢谢！</p>
+<p>对于有电脑的人来说，时间一久了C盘会无缘无故的红了起来；又或者卡顿、弹窗广告多等，想重装系统，但是又不会或者说因为Windows系统安装的方式分为好几种且比较复杂导致一步一错。为此我写了一篇关于最基础的装法的教程供大家参考。<br>
+注意：本文章使用的是U盘的安装方式，需要准备8GB及以上的U盘，文章按照U盘的系统镜像进行安装。</p>
+</blockquote>
+<p><b>目录<b><br>
+<a href="#toc-heading-1" style="text-decoration: none">一、制作系统U盘</a><br>
+<a href="#toc-heading-2" style="text-decoration: none">二、安装系统</a><br>
+<a href="#toc-heading-3" style="text-decoration: none">三、安装中可能出现的问题</a></b></b></p><b>
+<hr>
+<h2><a id="Ua_idtocheading1a_11"></a>一、制作系统U盘<a id="toc-heading-1"></a></h2>
+<h3><a id="11_Windows_13"></a>1.1 下载Windows镜像文件</h3>
+<br>
+<p>Windows系统镜像链接：<a target="_blank" rel="noopener" href="https://www.microsoft.com/zh-cn/software-download/windows10">windows 10</a><br>
+<br><br>
+网页界面如下：<br>
+<img src="https://img-blog.csdnimg.cn/fa2b866790c0497393bde204b7c4e710.png" alt="网页"><br>
+<br><br></p>
+<h3><a id="12_Windows_21"></a>1.2 打开Windows安装工具</h3>
+<p>​	打开下载好的exe运行文件。执行的操作是<strong>为另一台电脑创建安装介质</strong>。</p>
+<p><br><br></p>
+<h4><a id="121_Windows_27"></a>1.2.1 Windows版本选择</h4>
+<p>​	在选择系统版本时，这里把下面的<code>√</code>给取消掉，才可以对版本进行选择。我个人的建议是选择Windows 10，而非家庭版,除非你想用家庭版。(<em>ps:这个Windows 10版本包含了除开Windows中文家庭版的所有版本</em>)</p>
+<p><img src="https://img-blog.csdnimg.cn/c616b31620794ced98d6dfd4b952fe0f.png" alt="系统版本选择"><br>
+<br><br></p>
+<h4><a id="122__34"></a>1.2.2 使用的介质</h4>
+<p>​	使用的介质是U盘，这里需要提醒一下，<mark>U盘若存在有用的数据则必须备份，系统镜像刻入U盘时会首先对U盘进行格式化</mark>，U盘的大小推荐在8G及以上。(16G最好)</p>
+<blockquote>
+<p>之后选择需要写入的U盘即可，然后等待ing…。</p>
+</blockquote>
+<p><br><br></p>
+<h3><a id="13__41"></a>1.3 完成制作</h3>
+<br>
+​	当出现以下页面时，就表示已经制作完成。如下：
+<p><img src="https://img-blog.csdnimg.cn/c4909c3c1ff24728be246ee4477bfb3f.png" alt="安装完成界面"></p>
+<h2><a id="_a_idtocheading2a_48"></a>安装系统 <a id="toc-heading-2"></a></h2>
+<br>
+<blockquote>
+<p>从这一步开始则正是进入系统的安装！</p>
+</blockquote>
+<h3><a id="21_U_53"></a>2.1 设置U盘为第一启动项</h3>
+<p>​	因为大家的主板可能不一样，所以设置启动项的快捷方式也会不同(例如我的就是F12)，甚至有些主板它没有设置启动项的快捷键。所以这一步我直接采用在BIOS里更改的方式进行讲解：</p>
+<p>​	这里是各厂商的主板BIOS快捷键，大家可自行参考：</p>
+<p><img src="https://img-blog.csdnimg.cn/2c256af3a2c94deaac1d035ae0fc2ef8.png" alt="BIOS快捷键"><br>
+在电脑开机时，按住快捷键会进入BIOS页面，找到boot模块，在Boot Option #1中将U盘选择为第一启动项，按F10，弹出提示框选择YES。<em>我这里可能说的不清楚(绝对不是在偷懒)，详细见百度：<a target="_blank" rel="noopener" href="https://zhidao.baidu.com/question/1248333651217848139.html">设置u盘为第一启动项</a></em></p>
+<p><br><br></p>
+<h3><a id="22_Windows_64"></a>2.2 Windows安装程序</h3>
+<br>
+<p>​	在经过上述步骤之后，稍等片刻会出现这个界面：<br>
+<img src="https://img-blog.csdnimg.cn/b0fd7358be534cb29eb278c20d7fa1fa.png" alt="安装界面1"></p>
+<p>这里跟着我选择即可。</p>
+<p><img src="https://img-blog.csdnimg.cn/9eec742715c048638ef29fb83cebe49a.png" alt="安装界面2"></p>
+<br>
+<p><img src="https://img-blog.csdnimg.cn/49b39e2068bd4208ba4e3d861c9f09d4.png" alt="安装界面3"></p>
+<p>这里选择“没有产品密钥”即可。<br>
+<br></p>
+<p><img src="https://img-blog.csdnimg.cn/e6d27d8418ba4cdba6d846e75aba0fd6.png" alt="安装界面4"></p>
+<p>系统版本自己选择，我建议选专业版。<br>
+<br></p>
+<p><img src="https://img-blog.csdnimg.cn/3a4f6b67265f484fa85d2bdde000ae38.png" alt="安装界面5"></p>
+<p>接受软件许可条款。</p>
+<br>
+<p><img src="https://img-blog.csdnimg.cn/556d354d59964af2bcccf19176726caa.png" alt="安装图片6"><br>
+若存在上面这个选择，则选择第二个；若不存在则忽略。<br>
+<br><br></p>
+<h4><a id="221__99"></a>2.2.1 新建分区</h4>
+<p><img src="https://img-blog.csdnimg.cn/1ae236ed6fe548609b2bb17c59a38bc7.png" alt="新建分区"></p>
+<blockquote>
+<p>这一步若不出现驱动器则应该是使用某品牌厂商的电脑，它使用了BitLocker 驱动加密。若出现这个问题则移步到这里：<a href="#one">不显示驱动器</a></p>
+</blockquote>
+<p>对于一个新的硬盘来说，它里面是没有分区的，所以需要进行<strong>格式化</strong>，然后再点<strong>新建</strong>，进行分区。如下：</p>
+<br>
+<p><img src="https://img-blog.csdnimg.cn/8b989e4c1cca4e50bbfb1ae59d210874.png" alt="驱动器选择"></p>
+<p>最后，选择一个驱动器分区，然后开始安装即可，至此，系统的安装就全部完成。</p>
+<blockquote>
+<p>若在此处出现”无法在驱动器0的分区1上安装Windows(w)“则是分区是MBR或其他类型的分区，而你所安装的操作系统都不支持这个分区(一般是分区为MBR导致的)，请移步到这里：<a href="#two">不显示驱动器</a></p>
+</blockquote>
+<h2><a id="_a_idtocheading3a_118"></a>安装中可能出现的问题 <a id="toc-heading-3"></a></h2>
+<ul>
+<li>问题1：<a id="one" target="_blank" rel="noopener" href="https://www.xitongzhijia.net/xtjc/20220623/246045.html">不显示驱动器</a></li>
+<li>问题2：<a id="one" target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/369374452">无法在驱动器0的分区1上安装Windows(w)</a></li>
+</ul>
+<blockquote>
+<p>中途出现的问题可能千奇百怪，若出现是在解决不了的可以进群讨论:575954051。<br>
+若有时间下一张讲讲如何关闭自动更新和使用KMS数字激活系统，对系统做基本的优化。<br>
+最后，若文章中出现错误的地方请大佬指出，非常感谢！！！</p>
 </blockquote>
 </b></div>
 </body>
@@ -604,7 +600,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://aimang2002.github.io/2022/09/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%BAO(n)%E7%9A%841_n%E5%9B%A0%E6%95%B0%E4%B9%8B%E5%92%8C/">https://aimang2002.github.io/2022/09/29/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95%E2%80%94%E2%80%94%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%BAO(n)%E7%9A%841_n%E5%9B%A0%E6%95%B0%E4%B9%8B%E5%92%8C/</a>
+                    <a href="https://aimang2002.github.io/2023/01/23/Windows10%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/">https://aimang2002.github.io/2023/01/23/Windows10%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -641,11 +637,7 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            
-                                <a href="/tags/%E5%9B%A0%E6%95%B0%E4%B9%8B%E5%92%8C/">
-                                    <span class="chip bg-color">因数之和</span>
-                                </a>
-                            
+                            <span class="chip bg-color">无标签</span>
                         </div>
                     
                 </div>
@@ -813,9 +805,48 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2023/01/23/Windows10%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Windows 10 系统安装">
+                        
+                        <span class="card-title">Windows 10 系统安装</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-01-23
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            埃芒
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2022/11/23/C%20_C++%20malloc%E5%92%8Cnew/">
                     <div class="card-image">
@@ -833,9 +864,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-11-23
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-11-23
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -853,55 +884,6 @@
                     
                     <a href="/tags/malloc/">
                         <span class="chip bg-color">malloc</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
-            </div>
-            <div class="card">
-                <a href="/2022/09/08/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E5%92%8C%E7%AE%97%E6%B3%95%20%E2%80%94%E2%80%94%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="数据结构和算法————计数排序">
-                        
-                        <span class="card-title">数据结构和算法————计数排序</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-09-08
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/algorithm/" class="post-category">
-                                    algorithm
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/%E8%AE%A1%E6%95%B0%E6%8E%92%E5%BA%8F/">
-                        <span class="chip bg-color">计数排序</span>
                     </a>
                     
                 </div>
